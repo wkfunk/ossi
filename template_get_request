@@ -1,0 +1,16 @@
+--https://developers.google.com/fusiontables/docs/v2/using#WorkingRows--
+--https://developers.google.com/fusiontables/docs/v2/sql-reference#insertRow--
+
+https://www.googleapis.com/fusiontables/v2/query?sql=SELECT  <column_spec> {, <column_spec>}*
+
+FROM <table_id>
+
+{ WHERE <filter_condition> | <spatial_condition> { AND <filter_condition> }* }
+
+{ GROUP BY <column_name> {, <column_name>}* }
+
+{ ORDER BY <column_spec> { ASC | DESC } | <spatial_relationship> }
+
+{ OFFSET <number> }
+
+{ LIMIT <number> }

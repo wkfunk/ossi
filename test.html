@@ -1,0 +1,78 @@
+<!-- 
+API explorer: https://developers.google.com/apis-explorer/#p/
+fusiontables.table.get ex: https://developers.google.com/apis-explorer/#p/fusiontables/v2/fusiontables.table.get?tableId=1W7qnYSp1PfrnkykTDCwVfTrRn6tukszsrrEhmHY0&_h=2&
+-->
+<html>
+  <head>
+    <script>
+      function appendTableData(result) {
+        var results = document.getElementById('results');
+        //name
+        var name=document.createElement('H1');
+        var text=document.createTextNode(result.name);
+        name.appendChild(text);
+        results.appendChild(name);
+        //ID
+        results.appendChild(document.createElement('P'));
+        results.appendChild(document.createTextNode(result.tableId));
+      }
+
+      function appendTableRows(result) {
+        var results = document.getElementById('results');
+        var rows = result.rows;
+        var tbl  = document.createElement('table');
+        tbl.style.width  = '100px';
+        tbl.style.border = "1px solid black";
+
+        for(var i = 0; i < rows.length; i++){
+          var row = th.insertRow()
+          for(var j = 0; j < 6; j++){
+              var th = tr.insertCell();
+              td.appendChild(document.createTextNode(rows[i][j]));
+          }
+          
+          var tr = tbl.insertRow();
+          for(var j = 0; j < 6; j++){
+              var td = tr.insertCell();
+              td.appendChild(document.createTextNode(rows[i][j]));
+          }
+        }
+        results.appendChild(tbl);
+      }
+
+      function getTableData() {
+        var request = gapi.client.fusiontables.table.get({
+          'tableId': '1W7qnYSp1PfrnkykTDCwVfTrRn6tukszsrrEhmHY0'
+        });
+        request.then(function(response) {
+          appendTableData(response.result);
+        }, function(reason) {
+          console.log('Error: ' + reason.result.error.message);
+        });
+      }
+      function getTableRows() {
+        var request = gapi.client.fusiontables.query.sql({
+          'sql': 'SELECT * FROM 1W7qnYSp1PfrnkykTDCwVfTrRn6tukszsrrEhmHY0 LIMIT 5'
+        });
+        request.then(function(response) {
+          appendTableRows(response.result);
+        }, function(reason) {
+          console.log('Error: ' + reason.result.error.message);
+        });
+      }
+      function makeRequest() {
+        getTableData();
+        getTableRows();
+      }
+
+      function init() {
+        gapi.client.setApiKey('AIzaSyA1ZuuXEKbCNmFHb_Tue3Md0S0EZEz5_iM');
+        gapi.client.load('fusiontables', 'v2').then(makeRequest);
+      }
+    </script>
+    <script src="https://apis.google.com/js/client.js?onload=init"></script>
+  </head>
+  <body>
+    <div id="results"></div>
+  </body>
+</html>
