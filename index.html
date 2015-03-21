@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <!-- saved from url=(0038)http://getbootstrap.com/examples/grid/ -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,40 +17,47 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-<style type="text/css"></style>
+<style type="text/css">
+  table, th, td {
+    border: 1px solid black;
+  }
+</style>
 <script>
 function appendTableData(result) {
-  var results = document.getElementById('results');
+  $("#load").hide();
+  var table_data = document.getElementById('table_data');
   //name
   var name=document.createElement('H1');
   var text=document.createTextNode(result.name);
   name.appendChild(text);
-  results.appendChild(name);
+  table_data.appendChild(name);
   //ID
-  results.appendChild(document.createElement('P'));
-  results.appendChild(document.createTextNode(result.tableId));
+  table_data.appendChild(document.createElement('P'));
+  table_data.appendChild(document.createTextNode(result.tableId));
 }
 
 function appendTableRows(result) {
-  var results = document.getElementById('results');
+  var table_rows = document.getElementById('table_rows');
   var rows = result.rows;
   var tbl  = document.createElement('table');
   tbl.style.width  = '100px';
   tbl.style.border = "1px solid black";
 
-  var tr = tbl.insertRow();
+  var tr = tbl.insertRow(-1);
   for(var j = 0; j < 6; j++){
-    var td = tr.insertCell();
-    td.appendChild(document.createTextNode(result.columns[j]));
+    var th = document.createElement('TH');
+    var text = document.createTextNode(result.columns[j]);
+    th.appendChild(text);
+    tr.appendChild(th);
   }
   for(var i = 0; i < rows.length; i++){
-    var tr = tbl.insertRow();
+    var tr = tbl.insertRow(-1);
     for(var j = 0; j < 6; j++){
-      var td = tr.insertCell();
+      var td = tr.insertCell(-1);
       td.appendChild(document.createTextNode(rows[i][j]));
     }
   }
-  results.appendChild(tbl);
+  table_rows.appendChild(tbl);
 }
 
 function getTableData() {
@@ -93,12 +102,19 @@ function init() {
   </div>
 
   <!--results-->
+  <div id="load"><p class="text-center"><tt>loading...</tt></p></div>
   <div class="row">
-    <div id="results" class="col-md-6 col-md-offset-3"></div>
+    <div id="table_data" class="col-md-6 col-md-offset-3"></div>
+  </div>
+  <div class="row">
+    <div id="table_rows" class="col-md-6 col-md-offset-3"></div>
   </div>
   <hr>
   <p>footer&copy;</p>
   <!-- /container -->
 </div> 
-
-</body></html>
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="./js/jquery-1.11.2.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+</body>
+</html>
