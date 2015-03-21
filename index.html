@@ -27,13 +27,13 @@ function appendTableData(result) {
   $("#load").hide();
   var table_data = document.getElementById('table_data');
   //name
-  var name=document.createElement('H1');
-  var text=document.createTextNode(result.name);
+  var name=document.createElement('h3');
+  var text=document.createTextNode("Table name: " + result.name);
   name.appendChild(text);
   table_data.appendChild(name);
   //ID
   table_data.appendChild(document.createElement('P'));
-  table_data.appendChild(document.createTextNode(result.tableId));
+  table_data.appendChild(document.createTextNode("Table ID: " + result.tableId));
 }
 
 function appendTableRows(result) {
