@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)http://getbootstrap.com/examples/grid/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>OSSI</title>
+
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<style type="text/css"></style>
+<script>
+function appendTableData(result) {
+  var results = document.getElementById('results');
+  //name
+  var name=document.createElement('H1');
+  var text=document.createTextNode(result.name);
+  name.appendChild(text);
+  results.appendChild(name);
+  //ID
+  results.appendChild(document.createElement('P'));
+  results.appendChild(document.createTextNode(result.tableId));
+}
+
+function appendTableRows(result) {
+  var results = document.getElementById('results');
+  var rows = result.rows;
+  var tbl  = document.createElement('table');
+  tbl.style.width  = '100px';
+  tbl.style.border = "1px solid black";
+
+  for(var i = 0; i < rows.length; i++){
+    var tr = tbl.insertRow();
+    for(var j = 0; j < 6; j++){
+      var td = tr.insertCell();
+      td.appendChild(document.createTextNode(rows[i][j]));
+    }
+  }
+  results.appendChild(tbl);
+}
+
+function getTableData() {
+  var request = gapi.client.fusiontables.table.get({
+      'tableId': '1W7qnYSp1PfrnkykTDCwVfTrRn6tukszsrrEhmHY0'
+      });
+  request.then(function(response) {
+      appendTableData(response.result);
+      }, function(reason) {
+      console.log('Error: ' + reason.result.error.message);
+      });
+}
+function getTableRows() {
+  var request = gapi.client.fusiontables.query.sql({
+      'sql': 'SELECT * FROM 1W7qnYSp1PfrnkykTDCwVfTrRn6tukszsrrEhmHY0 LIMIT 5'
+      });
+  request.then(function(response) {
+      appendTableRows(response.result);
+      }, function(reason) {
+      console.log('Error: ' + reason.result.error.message);
+      });
+}
+function makeRequest() {
+  getTableData();
+  getTableRows();
+}
+
+function init() {
+  gapi.client.setApiKey('AIzaSyA1ZuuXEKbCNmFHb_Tue3Md0S0EZEz5_iM');
+  gapi.client.load('fusiontables', 'v2').then(makeRequest);
+}
+</script>
+<script src="https://apis.google.com/js/client.js?onload=init"></script>
+</head>
+
+<body>
+<div class="container">
+
+  <div class="page-header">
+    <h1>OSSI test page</h1>
+    <p class="lead">this is where the magic happens</p>
+  </div>
+
+  <!--results-->
+  <div class="row">
+    <div id="results" class="col-md-6 col-md-offset-3"></div>
+  </div>
+  <!-- /container -->
+</div> 
+
+</body></html>
