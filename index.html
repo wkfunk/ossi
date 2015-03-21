@@ -36,6 +36,11 @@ function appendTableRows(result) {
   tbl.style.width  = '100px';
   tbl.style.border = "1px solid black";
 
+  var tr = tbl.insertRow();
+  for(var j = 0; j < 6; j++){
+    var td = tr.insertCell();
+    td.appendChild(document.createTextNode(result.columns[j]));
+  }
   for(var i = 0; i < rows.length; i++){
     var tr = tbl.insertRow();
     for(var j = 0; j < 6; j++){
@@ -91,6 +96,8 @@ function init() {
   <div class="row">
     <div id="results" class="col-md-6 col-md-offset-3"></div>
   </div>
+  <hr>
+  <p>footer&copy;</p>
   <!-- /container -->
 </div> 
 
