@@ -24,40 +24,46 @@
 </style>
 <script>
 function appendTableData(result) {
-  $("#load").hide();
   var table_data = document.getElementById('table_data');
-  //name
-  var name=document.createElement('h3');
-  var text=document.createTextNode("Table name: " + result.name);
-  name.appendChild(text);
-  table_data.appendChild(name);
-  //ID
-  table_data.appendChild(document.createElement('P'));
-  table_data.appendChild(document.createTextNode("Table ID: " + result.tableId));
+  header = document.createElement('H3');
+  header.appendChild(
+      document.createTextNode(result.name)
+      );
+  table_data.appendChild(header);
+}
+
+function indicesOf(arr,toFind) {
+  var indices = [];
+  var idx = arr.indexOf(toFind);
+  while (idx != -1) {
+      indices.push(idx);
+      idx = arr.indexOf(toFind, idx + 1);
+  }
+  return(indices);
+}
+
+function simplifyResult(result) {
+  var res = {};
+  for (var i = 0; i < result.columns.length; i++) {
+    res[result.columns[i]] = [];
+    for (var j = 0; j < result.rows.length; j++) {
+      res[result.columns[i]][j] = result.rows[j][i];
+    }
+  }
+  return(res);
 }
 
 function appendTableRows(result) {
-  var table_rows = document.getElementById('table_rows');
-  var rows = result.rows;
-  var tbl  = document.createElement('table');
-  tbl.style.width  = '100px';
-  tbl.style.border = "1px solid black";
-
-  var tr = tbl.insertRow(-1);
-  for(var j = 0; j < 6; j++){
-    var th = document.createElement('TH');
-    var text = document.createTextNode(result.columns[j]);
-    th.appendChild(text);
-    tr.appendChild(th);
+  //restructure JSON
+  rows = simplifyResult(result);
+  table_rows = document.getElementById('table_rows');
+ 
+  for( var i = 0; i < rows["Variety Name"].length; i++) {
+    div = document.createElement("div");
+    text = document.createTextNode(rows["Variety Name"][i]);
+    div.appendChild(text);
+    table_rows.appendChild(div);
   }
-  for(var i = 0; i < rows.length; i++){
-    var tr = tbl.insertRow(-1);
-    for(var j = 0; j < 6; j++){
-      var td = tr.insertCell(-1);
-      td.appendChild(document.createTextNode(rows[i][j]));
-    }
-  }
-  table_rows.appendChild(tbl);
 }
 
 function getTableData() {
@@ -65,6 +71,9 @@ function getTableData() {
       'tableId': '1W7qnYSp1PfrnkykTDCwVfTrRn6tukszsrrEhmHY0'
       });
   request.then(function(response) {
+      //hide the loading div
+      $("#load").hide();
+      //then add the data
       appendTableData(response.result);
       }, function(reason) {
       console.log('Error: ' + reason.result.error.message);
@@ -72,7 +81,7 @@ function getTableData() {
 }
 function getTableRows() {
   var request = gapi.client.fusiontables.query.sql({
-      'sql': 'SELECT * FROM 1W7qnYSp1PfrnkykTDCwVfTrRn6tukszsrrEhmHY0 LIMIT 5'
+      'sql': 'SELECT * FROM 1W7qnYSp1PfrnkykTDCwVfTrRn6tukszsrrEhmHY0'
       });
   request.then(function(response) {
       appendTableRows(response.result);
