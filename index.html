@@ -145,6 +145,28 @@ function populateSelects(rows) {
   $("select").change(refreshFilters);
 }
 
+function makeRowDiv(result, idx) {
+  div = document.createElement("div");
+  div.id = idx;
+  div.className = "table_rows";
+
+  header = document.createElement("H4");
+  headerText = document.createTextNode(result["Variety Name"][idx]);
+  header.appendChild(headerText);
+
+  p = document.createElement("p");
+  pText = document.createTextNode(
+    result["Crop"][idx] + " | " + 
+    result["Breeder/company"][idx] + " | " + 
+    result["Breeder Affiliation"][idx] 
+  );
+  p.appendChild(pText);
+  div.appendChild(header);
+  div.appendChild(p);
+
+  return(div);
+}
+
 function appendTableRows(result) {
   //restructure JSON
   rows = simplifyResult(result);
@@ -152,6 +174,7 @@ function appendTableRows(result) {
   table_rows = document.getElementById('table_rows');
  
   for( var i = 0; i < rows["Variety Name"].length; i++) {
+    /*
     div = document.createElement("div");
     div.id = i;
     div.className = "table_rows";
@@ -163,6 +186,9 @@ function appendTableRows(result) {
     );
     div.appendChild(text);
     table_rows.appendChild(div);
+    */
+
+    table_rows.appendChild(makeRowDiv(rows, i));
   }
 }
 
