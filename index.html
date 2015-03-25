@@ -154,6 +154,10 @@ function makeRowDiv(result, idx) {
   headerText = document.createTextNode(result["Variety Name"][idx]);
   header.appendChild(headerText);
 
+  img = document.createElement("IMG");
+  img.setAttribute("src",result["Image URL"][idx]);
+  img.setAttribute("height","150");
+
   p = document.createElement("p");
   pText = document.createTextNode(
     result["Crop"][idx] + " | " + 
@@ -162,6 +166,9 @@ function makeRowDiv(result, idx) {
   );
   p.appendChild(pText);
   div.appendChild(header);
+  if( result["Image URL"][idx] ){
+    div.appendChild(img);
+  }
   div.appendChild(p);
 
   return(div);
