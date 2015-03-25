@@ -26,6 +26,7 @@ adding varieties:
 "more info" popup
   --claire to add descriptions to varieties
   --keith to determine whether we can do this in fusion tables
+    -probably not, fusion tables scrubs onclick from the <a>
 
 ossi 2.0
   --claire to give example seed company page to keith
