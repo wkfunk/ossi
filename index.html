@@ -212,6 +212,10 @@ function getTableData() {
       console.log('Error: ' + reason.result.error.message);
       });
 }
+//note: we can also do this with jquery:
+//a = $.post("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT+*+from+1NHYKF3S8G93SZKSyrQyQypMvd6UMPe7XMJSVaHO8&key=AIzaSyA1ZuuXEKbCNmFHb_Tue3Md0S0EZEz5_iM");
+// or:
+//b = $.get("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT+*+from+1W7qnYSp1PfrnkykTDCwVfTrRn6tukszsrrEhmHY0&key=AIzaSyA1ZuuXEKbCNmFHb_Tue3Md0S0EZEz5_iM");
 function getTableRows() {
   var request = gapi.client.fusiontables.query.sql({
       'sql': 'SELECT * FROM 1W7qnYSp1PfrnkykTDCwVfTrRn6tukszsrrEhmHY0'

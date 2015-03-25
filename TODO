@@ -1,0 +1,32 @@
+meeting 3/25/15:
+-----------------
+new agreement which states what ossi and the provider agree to. ossi agrees to:
+  -list varieties sold by each seed partner
+    --claire to list varieties sold by seed partners
+  -list each seed partner which offers a particular variety
+    --claire to add in extra links to rows with multiple availabilities
+    --keith to then add template code to display all availability links in TST, -> LIVE
+seed availability email links
+  done!
+
+refactoring db:
+  new cols/tables/linkages
+
+  tables:
+    crop
+    varieties
+    seed company partner
+
+adding varieties:
+  review process, prep for major outreach to companies/plant breeders
+  --keith to review process of going from google form to importing into fusion table
+    we can create an app script to dump form results to a fusion table:
+      https://fusion-tables-api-samples.googlecode.com/svn/trunk/FusionTablesFormSync/docs/reference.html
+
+"more info" popup
+  --claire to add descriptions to varieties
+  --keith to determine whether we can do this in fusion tables
+
+ossi 2.0
+  --claire to give example seed company page to keith
+  --keith to prototype new filtration mechanism
