@@ -1,0 +1,4 @@
+function init() {
+  gapi.client.setApiKey('AIzaSyA1ZuuXEKbCNmFHb_Tue3Md0S0EZEz5_iM');
+  gapi.client.load('fusiontables', 'v2').then(makeRequest);
+}
