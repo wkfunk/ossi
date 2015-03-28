@@ -11,6 +11,7 @@
 
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/masonry.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -41,7 +42,16 @@
 
   <!-- selectors -->
   <div class="row">
-    <div id="filters" class="col-md-6 col-md-offset-3">
+    <div id="filters" class="button-group col-md-12 ">
+      <button class="button is-checked" data-filter="*">show all</button>
+      <button class="button" data-filter=".Carol_Deppe">Carol Deppe</button>
+      <button class="button" data-filter=".bean">bean</button>
+      <button class="button" data-filter=".broccoli">broccoli</button>
+      <button class="button" data-filter=".bean, .broccoli">bean and broccoli</button>
+      <button class="button" data-filter=":not(.broccoli)">not broccoli</button>
+      <button class="button" data-filter=".broccoli:not(.bean)">broccoli but not bean</button>
+      <button class="button" data-filter="hasImg">has image</button>
+
       <form id="selectors">
       </form>
     </div>
@@ -49,19 +59,13 @@
 
   <br>
 
-  <!-- table data -->
-  <div class="row">
-    <div id="table_data" class="col-md-6 col-md-offset-3">
-    </div>
-  </div>
-
   <!--results-->
   <div id="load"><p class="text-center"><tt>loading...</tt></p></div>
   <div class="row">
     <div id="table_data" class="col-md-6 col-md-offset-3"></div>
   </div>
   <div class="row">
-    <div id="table_rows" class="col-md-6 col-md-offset-3"></div>
+    <div id="table_rows" class="isotope col-md-12 "></div>
   </div>
   <hr>
   <p>footer&copy;</p>
@@ -71,5 +75,9 @@
 <script src="./js/ossi.js"></script>
 <script src="./js/jquery-1.11.2.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
+<script src="./js/isotope/isotope.pkgd.min.js"></script>
+<script src="./js/isotope/packery-mode.pkgd.js"></script>
+
+
 </body>
 </html>

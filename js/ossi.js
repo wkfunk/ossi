@@ -1,3 +1,55 @@
+//iso init code
+function startIsotope() {
+    // init Isotope
+    var $container = $('.isotope').isotope({
+itemSelector: '.element-item',
+    layoutMode: 'masonry',
+    columnWidth: 300,
+  });
+
+  // filter functions
+  var filterFns = {
+    // show if number is greater than 50
+    numberGreaterThan50: function() {
+      var number = $(this).find('.number').text();
+      return parseInt( number, 10 ) > 50;
+    },
+    // show if name ends with -ium
+    ium: function() {
+      var name = $(this).find('.name').text();
+      return name.match( /ium$/ );
+    },
+    hasImg: function() {
+      var img = $(this).find('.Image_URL');
+      //img[0].src contains the URL
+      return img.length != 0;
+    }
+  };
+
+  // bind filter button click
+  $('#filters').on( 'click', 'button', function() {
+    var filterValue = $( this ).attr('data-filter');
+    // use filterFn if matches value
+    filterValue = filterFns[ filterValue ] || filterValue;
+    $container.isotope({ filter: filterValue });
+  });
+
+  
+  // change is-checked class on buttons
+  $('.button-group').each( function( i, buttonGroup ) {
+    var $buttonGroup = $( buttonGroup );
+    $buttonGroup.on( 'click', 'button', function() {
+      $buttonGroup.find('.is-checked').removeClass('is-checked');
+      $( this ).addClass('is-checked');
+    });
+  });
+
+  $container.isotope('bindResize');
+
+  
+};
+
+
 function onlyUnique(value, index, self) { 
   return self.indexOf(value) === index;
 }
@@ -121,31 +173,58 @@ function populateSelects(rows) {
   $("select").change(refreshFilters);
 }
 
+function createP(className, text) {
+  p = document.createElement("p");
+  p.className=className;
+  pText = document.createTextNode(text);
+  p.appendChild(pText);
+  return(p);
+}
+
+function escapeClassName(className) {
+  return( className.replace(/ /g, "_") );
+}
+
 function makeRowDiv(result, idx) {
+  //init vals
+  variety = result["Variety Name"][idx];
+  imgURL = result["Image URL"][idx];
+  crop = result["Crop"][idx];
+  breedAff = result["Breeder Affiliation"][idx];
+  breedComp  = result["Breeder/company"][idx];
+
   div = document.createElement("div");
-  div.id = idx;
-  div.className = "table_rows";
+  //div.id = idx;
+  div.className = "element-item";
 
   header = document.createElement("H4");
-  headerText = document.createTextNode(result["Variety Name"][idx]);
+  header.className="Variety_Name";
+  headerText = document.createTextNode(variety);
   header.appendChild(headerText);
 
   img = document.createElement("IMG");
-  img.setAttribute("src",result["Image URL"][idx]);
+  img.className="Image_URL";
+  img.setAttribute("src",imgURL);
   img.setAttribute("height","150");
 
-  p = document.createElement("p");
-  pText = document.createTextNode(
-    result["Crop"][idx] + " | " + 
-    result["Breeder/company"][idx] + " | " + 
-    result["Breeder Affiliation"][idx] 
-  );
-  p.appendChild(pText);
+  p1 = createP("Crop",crop);
+  p2 = createP("Breeder/company",breedComp);
+  p3 = createP("Breeder Affiliation",breedAff);
+
   div.appendChild(header);
-  if( result["Image URL"][idx] ){
+  if( imgURL ){
     div.appendChild(img);
   }
-  div.appendChild(p);
+  div.appendChild(p1);
+  div.appendChild(p2);
+  div.appendChild(p3);
+
+  div.classList.add(
+      escapeClassName(crop),
+      escapeClassName(breedComp),
+      escapeClassName(breedAff )
+      );
+
 
   return(div);
 }
@@ -153,24 +232,10 @@ function makeRowDiv(result, idx) {
 function appendTableRows(result) {
   //restructure JSON
   rows = simplifyResult(result);
-  populateSelects(rows);
+  //populateSelects(rows);
   table_rows = document.getElementById('table_rows');
  
   for( var i = 0; i < rows["Variety Name"].length; i++) {
-    /*
-    div = document.createElement("div");
-    div.id = i;
-    div.className = "table_rows";
-    text = document.createTextNode(
-      rows["Variety Name"][i] + "; " + 
-      rows["Crop"][i] + "; " + 
-      rows["Breeder/company"][i] + "; " + 
-      rows["Breeder Affiliation"][i] 
-    );
-    div.appendChild(text);
-    table_rows.appendChild(div);
-    */
-
     table_rows.appendChild(makeRowDiv(rows, i));
   }
 }
@@ -205,4 +270,5 @@ function getTableRows() {
 function makeRequest() {
   getTableData();
   getTableRows();
+  startIsotope();
 }
