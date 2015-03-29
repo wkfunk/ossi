@@ -35,6 +35,8 @@ body {
   border-width: 5px;
   border: 2px solid;
   /*border-radius: 25px;*/
+  padding: 5px;
+  margin: 5px;
 }
 
 .element-item > * {

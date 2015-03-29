@@ -1,9 +1,41 @@
+function makeRequest() {
+  getTableData();
+  getTableRows();
+}
+function getTableData() {
+  var request = gapi.client.fusiontables.table.get({
+      'tableId': '1W7qnYSp1PfrnkykTDCwVfTrRn6tukszsrrEhmHY0'
+      });
+  request.then(function(response) {
+      //hide the loading div
+      $("#load").hide();
+      //then add the data
+      appendTableData(response.result);
+      }, function(reason) {
+      console.log('Error: ' + reason.result.error.message);
+      });
+}
+//note: we can also do this with jquery:
+//a = $.post("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT+*+from+1NHYKF3S8G93SZKSyrQyQypMvd6UMPe7XMJSVaHO8&key=AIzaSyA1ZuuXEKbCNmFHb_Tue3Md0S0EZEz5_iM");
+// or:
+//b = $.get("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT+*+from+1W7qnYSp1PfrnkykTDCwVfTrRn6tukszsrrEhmHY0&key=AIzaSyA1ZuuXEKbCNmFHb_Tue3Md0S0EZEz5_iM");
+function getTableRows() {
+  var request = gapi.client.fusiontables.query.sql({
+      'sql': 'SELECT * FROM 1W7qnYSp1PfrnkykTDCwVfTrRn6tukszsrrEhmHY0'
+      });
+  request.then(function(response) {
+      appendTableRows(response.result);
+      startIsotope();
+      }, function(reason) {
+      console.log('Error: ' + reason.result.error.message);
+      });
+}
 //iso init code
 function startIsotope() {
     // init Isotope
     var $container = $('.isotope').isotope({
 itemSelector: '.element-item',
-    layoutMode: 'masonry',
+    layoutMode: 'packery',
     columnWidth: 300,
   });
 
@@ -240,35 +272,3 @@ function appendTableRows(result) {
   }
 }
 
-function getTableData() {
-  var request = gapi.client.fusiontables.table.get({
-      'tableId': '1W7qnYSp1PfrnkykTDCwVfTrRn6tukszsrrEhmHY0'
-      });
-  request.then(function(response) {
-      //hide the loading div
-      $("#load").hide();
-      //then add the data
-      appendTableData(response.result);
-      }, function(reason) {
-      console.log('Error: ' + reason.result.error.message);
-      });
-}
-//note: we can also do this with jquery:
-//a = $.post("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT+*+from+1NHYKF3S8G93SZKSyrQyQypMvd6UMPe7XMJSVaHO8&key=AIzaSyA1ZuuXEKbCNmFHb_Tue3Md0S0EZEz5_iM");
-// or:
-//b = $.get("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT+*+from+1W7qnYSp1PfrnkykTDCwVfTrRn6tukszsrrEhmHY0&key=AIzaSyA1ZuuXEKbCNmFHb_Tue3Md0S0EZEz5_iM");
-function getTableRows() {
-  var request = gapi.client.fusiontables.query.sql({
-      'sql': 'SELECT * FROM 1W7qnYSp1PfrnkykTDCwVfTrRn6tukszsrrEhmHY0'
-      });
-  request.then(function(response) {
-      appendTableRows(response.result);
-      }, function(reason) {
-      console.log('Error: ' + reason.result.error.message);
-      });
-}
-function makeRequest() {
-  getTableData();
-  getTableRows();
-  startIsotope();
-}
