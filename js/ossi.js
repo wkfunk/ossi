@@ -32,12 +32,23 @@ function getTableRows() {
 }
 //iso init code
 function startIsotope() {
+    var qsRegex;
     // init Isotope
     var $container = $('.isotope').isotope({
 itemSelector: '.element-item',
     layoutMode: 'packery',
     columnWidth: 300,
+    filter: function() {
+      return qsRegex ? $(this).text().match( qsRegex ) : true;
+    }
   });
+
+  // use value of search field to filter
+  var $quicksearch = $('#quicksearch').keyup( debounce( function() {
+    qsRegex = new RegExp( $quicksearch.val(), 'gi' );
+    $container.isotope();
+  }, 200 ) );
+
 
   // store filter for each group
   var filters = {};
@@ -56,6 +67,8 @@ itemSelector: '.element-item',
     }
     // set filter for Isotope
     $container.isotope({ filter: filterValue });
+    //clear search
+    $("#quicksearch").val("");
   });
 
   // change is-checked class on buttons
@@ -71,6 +84,22 @@ itemSelector: '.element-item',
 
   
 };
+
+// debounce so filtering doesn't happen every millisecond
+function debounce( fn, threshold ) {
+  var timeout;
+  return function debounced() {
+    if ( timeout ) {
+      clearTimeout( timeout );
+    }
+    function delayed() {
+      fn();
+      timeout = null;
+    }
+    timeout = setTimeout( delayed, threshold || 100 );
+  }
+}
+
 
 
 function onlyUnique(value, index, self) { 
