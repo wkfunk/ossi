@@ -38,19 +38,82 @@
 
   <!-- selectors -->
   <div class="row">
-    <div id="filters" class="button-group col-md-12 ">
-      <button class="button is-checked" data-filter="*">show all</button>
-      <button class="button" data-filter=".Carol_Deppe">Carol Deppe</button>
-      <button class="button" data-filter=".bean">bean</button>
-      <button class="button" data-filter=".broccoli">broccoli</button>
-      <button class="button" data-filter=".bean, .broccoli">bean and broccoli</button>
-      <button class="button" data-filter=":not(.broccoli)">not broccoli</button>
-      <button class="button" data-filter=".broccoli:not(.bean)">broccoli but not bean</button>
-      <button class="button" data-filter="hasImg">has image</button>
+    <div id="filters">
 
-      <form id="selectors">
-      </form>
-    </div>
+
+
+      <div class="ui-group">
+        <h3>Breeder Affiliation</h3>
+        <div class="button-group js-radio-button-group" data-filter-group="color">
+          <button class="button is-checked" data-filter="">any</button>
+          <button class="button" data-filter=".Cornell_University">Cornell University</button>
+          <button class="button" data-filter=".Cultivariable">Cultivariable</button>
+          <button class="button" data-filter=".Fertile_Valley_Seeds">Fertile Valley Seeds</button>
+          <button class="button" data-filter=".High_Mowing_Organic_Seeds">High Mowing Organic Seeds</button>
+          <button class="button" data-filter=".Lupine_Knoll_Farm">Lupine Knoll Farm</button>
+          <button class="button" data-filter=".Oikos_Tree_Crops">Oikos Tree Crops</button>
+          <button class="button" data-filter=".Oregon_State_University">Oregon State University</button>
+          <button class="button" data-filter=".Siskiyou_Seeds">Siskiyou Seeds</button>
+          <button class="button" data-filter=".University_of_Wisconsin-Madison">University of Wisconsin-Madison</button>
+          <button class="button" data-filter=".Washington_State_University">Washington State University</button>
+          <button class="button" data-filter=".Wild_Garden_Seed">Wild Garden Seed</button>
+
+        </div>
+      </div>
+
+      <div class="ui-group">
+        <h3>Breeder/company</h3>
+        <div class="button-group js-radio-button-group" data-filter-group="size">
+          <button class="button is-checked" data-filter="">any</button>
+          <button class="button" data-filter=".Bill_Whitson">Bill Whitson</button>
+          <button class="button" data-filter=".Carol_Deppe">Carol Deppe</button>
+          <button class="button" data-filter=".Don_Tipping">Don Tipping</button>
+          <button class="button" data-filter=".Frank_Morton">Frank Morton</button>
+          <button class="button" data-filter=".High_Mowing_Organic_Seeds">High Mowing Organic Seeds</button>
+          <button class="button" data-filter=".Irwin_Goldman">Irwin Goldman</button>
+          <button class="button" data-filter=".Jonathan_Spero">Jonathan Spero</button>
+          <button class="button" data-filter=".Ken_Asmus">Ken Asmus</button>
+          <button class="button" data-filter=".Kevin_Murphy_and_Stephen_Jones">Kevin Murphy and Stephen Jones</button>
+          <button class="button" data-filter=".Mark_Sorrells">Mark Sorrells</button>
+          <button class="button" data-filter=".Pat_Hayes">Pat Hayes</button>
+
+
+
+        </div>
+      </div>
+
+      <div class="ui-group">
+        <h3>Crop</h3>
+        <div class="button-group js-radio-button-group" data-filter-group="shape">
+          <button class="button is-checked" data-filter="">any</button>
+          <button class="button" data-filter=".Barley">Barley</button>
+          <button class="button" data-filter=".Bean__Cicer_arietinum">Bean, Cicer arietinum</button>
+          <button class="button" data-filter=".Bean__Phaseolus_vulgaris">Bean, Phaseolus vulgaris</button>
+          <button class="button" data-filter=".Bean__Vigna_unguiculata">Bean, Vigna unguiculata</button>
+          <button class="button" data-filter=".Broccoli">Broccoli</button>
+          <button class="button" data-filter=".Calendula">Calendula</button>
+          <button class="button" data-filter=".Carrot">Carrot</button>
+          <button class="button" data-filter=".Celery">Celery</button>
+          <button class="button" data-filter=".Corn">Corn</button>
+          <button class="button" data-filter=".Cress">Cress</button>
+          <button class="button" data-filter=".Kale">Kale</button>
+          <button class="button" data-filter=".Lettuce">Lettuce</button>
+          <button class="button" data-filter=".Mustard">Mustard</button>
+          <button class="button" data-filter=".Oca">Oca</button>
+          <button class="button" data-filter=".Onion">Onion</button>
+          <button class="button" data-filter=".Pepper">Pepper</button>
+          <button class="button" data-filter=".Quinoa">Quinoa</button>
+          <button class="button" data-filter=".Spelt">Spelt</button>
+          <button class="button" data-filter=".Watermelon_Seeds">Watermelon Seeds</button>
+          <button class="button" data-filter=".Wheat">Wheat</button>
+          <button class="button" data-filter=".Winter_squash__Cucurbita_maxima">Winter squash, Cucurbita maxima</button>
+          <button class="button" data-filter=".Winter_squash__Cucurbita_pepo">Winter squash, Cucurbita pepo</button>
+          <button class="button" data-filter=".Zucchini">Zucchini</button>
+
+        </div>
+      </div>
+
+    </div>    
   </div>
 
   <br>
