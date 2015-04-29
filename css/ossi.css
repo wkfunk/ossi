@@ -69,6 +69,6 @@ body {
   border: 5px solid green;
 }
 
-.partners div > div {
+div.partners{
   border: 5px solid red;
 }
