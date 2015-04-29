@@ -61,6 +61,6 @@ body {
   clear: both;
 }
 
-.float-right div > div {
+.float-right p{
   font:red;
 }
