@@ -61,6 +61,6 @@ body {
   clear: both;
 }
 
-.float-right div > div {
-  color:red;
+.float-right > div {
+  margin: 100px 0;
 }
