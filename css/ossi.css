@@ -66,9 +66,9 @@ body {
 }
 
 .partners > div {
-  border: 5px solid green;
+  float:left;
 }
 
 div.partners{
-  border: 5px solid red;
+  overflow:hidden;
 }
