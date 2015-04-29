@@ -64,3 +64,11 @@ body {
 .float-right > div {
   margin: 50px 0;
 }
+
+.partners > div {
+  background-color: green;
+}
+
+.partners div > div {
+  background-color: red;
+}
