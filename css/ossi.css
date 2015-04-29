@@ -23,14 +23,14 @@
 
 
 /* Center align the text within the three columns below the carousel */
-.team .more-info div {
+.cols div {
   margin-bottom: 20px;
   text-align: center;
 }
-.team .more-info h2 {
+.cols h2{
   font-weight: normal;
 }
-.team .more-info p {
+.cols p {
   margin-right: 10px;
   margin-left: 10px;
 }
