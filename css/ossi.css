@@ -23,7 +23,7 @@
 
 
 /* Center align the text within the three columns below the carousel */
-.team .col-md-4 {
+.team div {
   margin-bottom: 20px;
   text-align: center;
 }
