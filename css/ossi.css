@@ -60,3 +60,7 @@ body {
 .float-right div {
   clear: both;
 }
+
+.float-right > div {
+  font:red;
+}
