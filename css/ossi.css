@@ -67,6 +67,8 @@ body {
 
 .partners > div {
   float:left;
+  vertical-align: center;
+  margin: 50px;
 }
 
 div.partners{
