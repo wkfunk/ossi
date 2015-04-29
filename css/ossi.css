@@ -52,3 +52,11 @@ body {
   border: 0;
   vertical-align: middle;
 }
+
+.float-right img {
+  float: right;
+}
+
+.float-right div {
+  clear: both;
+}
