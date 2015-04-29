@@ -66,9 +66,9 @@ body {
 }
 
 .partners > div {
-  background-color: green;
+  border: 5px solid green;
 }
 
 .partners div > div {
-  background-color: red;
+  border: 5px solid red;
 }
